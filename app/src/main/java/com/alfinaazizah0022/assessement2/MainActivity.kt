@@ -36,7 +36,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.alfinaazizah0022.assessement2.model.Buku
+import com.alfinaazizah0022.assessement2.navigation.Screen
 import com.alfinaazizah0022.assessement2.navigation.SetupNavGraph
 import com.alfinaazizah0022.assessement2.screen.MainViewModel
 import com.alfinaazizah0022.assessement2.ui.theme.Assessement2Theme
@@ -55,8 +58,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
-    val context = LocalContext.current
+fun MainScreen(navController: NavHostController) {
 
     Scaffold (
         topBar = {
@@ -67,13 +69,13 @@ fun MainScreen() {
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary,
-                )
+                ),
             )
         },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    Toast.makeText(context, R.string.belum_bisa, Toast.LENGTH_SHORT).show()
+                    navController.navigate(Screen.FormBaru.route)
                 }
             ) {
                 Icon(
@@ -152,6 +154,6 @@ fun ListIem(buku: Buku, onClick: () -> Unit) {
 @Composable
 fun MainScreenPreview() {
     Assessement2Theme {
-        MainScreen()
+        MainScreen(rememberNavController())
     }
 }

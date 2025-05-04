@@ -3,9 +3,10 @@
     <string name="list_kosong">Belum ada data</string>
     <string name="x_diklik">%1$s diklik!</string>
     <string name="tambah_buku">Tambah buku</string>
-    <string name="belum_bisa">Belum bisa tambah buku.</string>
     <string name="judul">Judul</string>
     <string name="penulis">Penulis</string>
     <string name="isbn">ISBN</string>
     <string name="kategori">Kategori</string>
+    <string name="kembali">Kembali</string>
+    <string name="simpan">Simpan</string>
 </resources>
