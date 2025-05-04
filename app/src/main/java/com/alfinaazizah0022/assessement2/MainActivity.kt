@@ -37,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alfinaazizah0022.assessement2.model.Buku
+import com.alfinaazizah0022.assessement2.navigation.SetupNavGraph
 import com.alfinaazizah0022.assessement2.screen.MainViewModel
 import com.alfinaazizah0022.assessement2.ui.theme.Assessement2Theme
 
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Assessement2Theme {
-                MainScreen()
+                SetupNavGraph()
             }
         }
     }
