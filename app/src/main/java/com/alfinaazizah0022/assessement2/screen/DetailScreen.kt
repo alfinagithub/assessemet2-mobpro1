@@ -47,9 +47,11 @@ import androidx.navigation.compose.rememberNavController
 import com.alfinaazizah0022.assessement2.R
 import com.alfinaazizah0022.assessement2.ui.theme.Assessement2Theme
 
+const val KEY_ID_BUKU = "idBuku"
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(navController: NavHostController) {
+fun DetailScreen(navController: NavHostController, id: Long? = null) {
     var judul by remember { mutableStateOf("") }
     var writer by remember { mutableStateOf("") }
     var isbn by remember { mutableStateOf("") }
@@ -68,7 +70,10 @@ fun DetailScreen(navController: NavHostController) {
                     }
                 },
                 title = {
-                    Text(text = stringResource(id = R.string.tambah_buku))
+                    if (id == null)
+                        Text(text = stringResource(id = R.string.tambah_buku))
+                    else
+                        Text(text = stringResource(id = R.string.edit_buku))
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
