@@ -108,7 +108,7 @@ fun ScreenContent(modifier: Modifier = Modifier, navController: NavHostControlle
             contentPadding = PaddingValues(bottom = 84.dp)
         ) {
             items(data) {
-                ListIem(buku = it) {
+                ListItem(buku = it) {
                     navController.navigate(Screen.FormUbah.withId(it.id))
                 }
                 HorizontalDivider()
@@ -118,7 +118,7 @@ fun ScreenContent(modifier: Modifier = Modifier, navController: NavHostControlle
 }
 
 @Composable
-fun ListIem(buku: Buku, onClick: () -> Unit) {
+fun ListItem(buku: Buku, onClick: () -> Unit) {
     Column(
         modifier = Modifier.fillMaxWidth()
             .clickable { onClick() }

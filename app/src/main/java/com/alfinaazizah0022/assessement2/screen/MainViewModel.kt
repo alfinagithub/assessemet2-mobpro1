@@ -84,4 +84,8 @@ class MainViewModel : ViewModel() {
             "Komik"
         )
     )
+
+    fun getBuku(id: Long): Buku? {
+        return data.find { it.id == id }
+    }
 }
