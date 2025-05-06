@@ -1,6 +1,7 @@
 package com.alfinaazizah0022.assessement2.database
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
@@ -15,6 +16,9 @@ interface BukuDao {
 
     @Update
     suspend fun update(buku: Buku)
+
+    @Delete
+    suspend fun delete(buku: Buku)
 
     @Query("SELECT * FROM buku ORDER BY judul DESC")
     fun getBuku(): Flow<List<Buku>>

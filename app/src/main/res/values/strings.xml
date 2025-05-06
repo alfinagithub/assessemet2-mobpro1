@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Assessement 2</string>
+    <string name="app_name">Data Buku Perpustakaan</string>
     <string name="list_kosong">Belum ada data</string>
     <string name="x_diklik">%1$s diklik!</string>
     <string name="tambah_buku">Tambah buku</string>
@@ -18,4 +18,5 @@
     <string name="tombol_batal">Batal</string>
     <string name="list">Tampilan list</string>
     <string name="grid">Tampilan grid</string>
+    <string name="recycle_bin">Recycle bin</string>
 </resources>
