@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,8 +15,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
@@ -109,12 +116,12 @@ fun MainScreen(navController: NavHostController) {
             }
         }
     ){ innerPadding ->
-        ScreenContent(Modifier.padding(innerPadding), navController)
+        ScreenContent(showList, Modifier.padding(innerPadding), navController)
     }
 }
 
 @Composable
-fun ScreenContent(modifier: Modifier = Modifier, navController: NavHostController) {
+fun ScreenContent(showList: Boolean ,modifier: Modifier = Modifier, navController: NavHostController) {
     val context = LocalContext.current
     val factory = ViewModelFactory(context)
     val viewModel: MainViewModel = viewModel(factory = factory)
@@ -130,15 +137,32 @@ fun ScreenContent(modifier: Modifier = Modifier, navController: NavHostControlle
         }
     }
     else {
-        LazyColumn(
-            modifier = modifier.fillMaxSize(),
-            contentPadding = PaddingValues(bottom = 84.dp)
-        ) {
-            items(data) {
-                ListItem(buku = it) {
-                    navController.navigate(Screen.FormUbah.withId(it.id))
+        if (showList) {
+            LazyColumn(
+                modifier = modifier.fillMaxSize(),
+                contentPadding = PaddingValues(bottom = 84.dp)
+            ) {
+                items(data) {
+                    ListItem(buku = it) {
+                        navController.navigate(Screen.FormUbah.withId(it.id))
+                    }
+                    HorizontalDivider()
                 }
-                HorizontalDivider()
+            }
+        }
+        else {
+            LazyVerticalStaggeredGrid(
+                modifier = modifier.fillMaxSize(),
+                columns = StaggeredGridCells.Fixed(2),
+                verticalItemSpacing = 8.dp,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(8.dp, 8.dp, 8.dp, 84.dp)
+            ) {
+                items(data) {
+                    GridItem(buku = it) {
+                        navController.navigate(Screen.FormUbah.withId(it.id))
+                    }
+                }
             }
         }
     }
@@ -169,6 +193,40 @@ fun ListItem(buku: Buku, onClick: () -> Unit) {
             overflow = TextOverflow.Ellipsis
         )
         Text(text = buku.kategori)
+    }
+}
+
+@Composable
+fun GridItem(buku: Buku, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier.fillMaxWidth().clickable { onClick() },
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+        ),
+        border = BorderStroke(1.dp, DividerDefaults.color)
+    ) {
+        Column(
+            modifier = Modifier.padding(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Text(
+                text = buku.judul,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = buku.penulis,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(
+                text = buku.isbn,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(text = buku.kategori)
+        }
     }
 }
 
