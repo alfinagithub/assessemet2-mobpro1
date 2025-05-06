@@ -1,6 +1,7 @@
 package com.alfinaazizah0022.assessement2.screen
 
 import android.content.res.Configuration
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -38,6 +39,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -50,13 +52,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.alfinaazizah0022.assessement2.R
 import com.alfinaazizah0022.assessement2.ui.theme.Assessement2Theme
+import com.alfinaazizah0022.assessement2.util.ViewModelFactory
 
 const val KEY_ID_BUKU = "idBuku"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(navController: NavHostController, id: Long? = null) {
-    val viewModel: MainViewModel = viewModel()
+    val context = LocalContext.current
+    val factory = ViewModelFactory(context)
+    val viewModel: DetailViewModel = viewModel(factory = factory)
 
     var judul by remember { mutableStateOf("") }
     var writer by remember { mutableStateOf("") }
@@ -95,7 +100,16 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
                 actions = {
-                    IconButton(onClick = {navController.popBackStack()}) {
+                    IconButton(onClick = {
+                        if (judul == "" || writer == "" || isbn == "") {
+                            Toast.makeText(context, R.string.invalid, Toast.LENGTH_SHORT).show()
+                            return@IconButton
+                        }
+                        if (id == null) {
+                            viewModel.insert(judul, writer, isbn, kategori)
+                        }
+                        navController.popBackStack()
+                    }) {
                         Icon(
                             imageVector = Icons.Outlined.Check,
                             contentDescription = stringResource(R.string.simpan),

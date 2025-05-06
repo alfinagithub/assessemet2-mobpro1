@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.alfinaazizah0022.assessement2.database.BukuDb
+import com.alfinaazizah0022.assessement2.screen.DetailViewModel
 import com.alfinaazizah0022.assessement2.screen.MainViewModel
 
 class ViewModelFactory(
@@ -14,6 +15,8 @@ class ViewModelFactory(
         val dao = BukuDb.getInstance(context).dao
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             return MainViewModel(dao) as T
+        } else if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
+            return DetailViewModel(dao) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
