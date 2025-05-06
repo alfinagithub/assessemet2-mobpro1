@@ -13,4 +13,7 @@
     <string name="invalid">Judul, penulis, isbn, dan kategori tidak boleh kosong.</string>
     <string name="lainnya">Opsi lainnya</string>
     <string name="hapus">Hapus buku</string>
+    <string name="pesan_hapus">Hapus buku ini?</string>
+    <string name="tombol_hapus">Hapus</string>
+    <string name="tombol_batal">Batal</string>
 </resources>
