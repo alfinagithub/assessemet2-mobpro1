@@ -1,91 +1,22 @@
 package com.alfinaazizah0022.assessement2.screen
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.alfinaazizah0022.assessement2.database.BukuDao
 import com.alfinaazizah0022.assessement2.model.Buku
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 
-class MainViewModel : ViewModel() {
+class MainViewModel(dao: BukuDao) : ViewModel() {
 
-    val data = listOf(
-        Buku(
-            1,
-            "Dongeng",
-            "dafa",
-            "583285804",
-            "Komik"
-        ),
-        Buku(
-            2,
-            "Dongeng",
-            "dafa",
-            "583285804",
-            "Komik"
-        ),
-        Buku(
-            3,
-            "Dongeng",
-            "dafa",
-            "583285804",
-            "Komik"
-        ),
-        Buku(
-            4,
-            "Dongeng",
-            "dafa",
-            "583285804",
-            "Komik"
-        ),
-        Buku(
-            5,
-            "Dongeng",
-            "dafa",
-            "583285804",
-            "Komik"
-        ),
-        Buku(
-            6,
-            "Dongeng",
-            "dafa",
-            "583285804",
-            "Komik"
-        ),
-        Buku(
-            7,
-            "Dongeng",
-            "dafa",
-            "583285804",
-            "Komik"
-        ),
-        Buku(
-            8,
-            "Dongeng",
-            "dafa",
-            "583285804",
-            "Komik"
-        ),
-        Buku(
-            9,
-            "Dongeng",
-            "dafa",
-            "583285804",
-            "Komik"
-        ),
-        Buku(
-            10,
-            "Dongeng",
-            "dafa",
-            "583285804",
-            "Komik"
-        ),
-        Buku(
-            11,
-            "Dongeng",
-            "dafa",
-            "583285804",
-            "Komik"
-        )
+    val data: StateFlow<List<Buku>> = dao.getBuku().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(),
+        initialValue = emptyList()
     )
 
     fun getBuku(id: Long): Buku? {
-        return data.find { it.id == id }
+        return data.value.find { it.id == id }
     }
 }
