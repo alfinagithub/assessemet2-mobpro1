@@ -107,6 +107,8 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                         }
                         if (id == null) {
                             viewModel.insert(judul, writer, isbn, kategori)
+                        } else {
+                            viewModel.update(id, judul, writer, isbn, kategori)
                         }
                         navController.popBackStack()
                     }) {

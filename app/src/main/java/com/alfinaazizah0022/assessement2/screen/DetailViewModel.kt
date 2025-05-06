@@ -22,7 +22,21 @@ class DetailViewModel(private val dao: BukuDao) : ViewModel() {
         }
     }
 
-    fun getBuku(id: Long): Buku? {
-        return null
+    suspend fun getBuku(id: Long): Buku? {
+        return dao.getBukuById(id)
+    }
+
+    fun update(id: Long, judul: String, penulis: String, isbn: String, kategori: String) {
+        val buku = Buku(
+            id = id,
+            judul = judul,
+            penulis = penulis,
+            isbn = isbn,
+            kategori = kategori
+        )
+
+        viewModelScope.launch(Dispatchers.IO) {
+            dao.update(buku)
+        }
     }
 }

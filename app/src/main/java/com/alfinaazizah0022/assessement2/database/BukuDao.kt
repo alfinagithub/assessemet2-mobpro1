@@ -18,4 +18,7 @@ interface BukuDao {
 
     @Query("SELECT * FROM buku ORDER BY judul DESC")
     fun getBuku(): Flow<List<Buku>>
+
+    @Query("SELECT * FROM buku WHERE id = :id")
+    suspend fun getBukuById(id: Long): Buku?
 }
