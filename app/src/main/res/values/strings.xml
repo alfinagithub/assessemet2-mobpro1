@@ -11,4 +11,6 @@
     <string name="simpan">Simpan</string>
     <string name="edit_buku">Ubah buku</string>
     <string name="invalid">Judul, penulis, isbn, dan kategori tidak boleh kosong.</string>
+    <string name="lainnya">Opsi lainnya</string>
+    <string name="hapus">Hapus buku</string>
 </resources>

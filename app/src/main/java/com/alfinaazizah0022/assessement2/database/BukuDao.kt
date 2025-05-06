@@ -21,4 +21,7 @@ interface BukuDao {
 
     @Query("SELECT * FROM buku WHERE id = :id")
     suspend fun getBukuById(id: Long): Buku?
+
+    @Query("DELETE FROM buku WHERE id = :id")
+    suspend fun deleteById(id: Long)
 }
