@@ -4,9 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.alfinaazizah0022.assessement2.model.Buku
 
-@Database(entities = [Buku::class], version = 1, exportSchema = false)
+@Database(entities = [Buku::class], version = 2, exportSchema = false)
 abstract class BukuDb : RoomDatabase() {
 
     abstract val dao: BukuDao
@@ -15,6 +17,15 @@ abstract class BukuDb : RoomDatabase() {
 
         @Volatile
         private var INSTANCE: BukuDb? = null
+
+        private val MIGRATION_1_2 = object : Migration(1,2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                    "ALTER TABLE buku ADD COLUMN isDeleted INTEGER NOT NULL DEFAULT 0"
+                )
+            }
+        }
+
 
         fun getInstance(context: Context): BukuDb {
             synchronized(this) {
@@ -25,7 +36,9 @@ abstract class BukuDb : RoomDatabase() {
                         context.applicationContext,
                         BukuDb::class.java,
                         "buku.db"
-                    ).build()
+                    )
+                        .addMigrations(MIGRATION_1_2)
+                        .build()
                     INSTANCE = instance
                 }
                 return instance

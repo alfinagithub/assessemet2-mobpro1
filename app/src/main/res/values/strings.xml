@@ -22,4 +22,7 @@
     <string name="undo">Undo</string>
     <string name="no_deleted_books">Tidak ada buku yang dihapus</string>
     <string name="undo_restore">Pulihkan %1$s</string>
+    <string name="sampah">Sampah</string>
+    <string name="pulihkan">Pulihkan</string>
+    <string name="hapus_perm">Hapus permanen</string>
 </resources>

@@ -88,7 +88,9 @@ fun MainScreen(navController: NavHostController) {
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = {
+                        navController.navigate(Screen.TrashScreen.route)
+                    }) {
                         Icon(
                             painter = painterResource(R.drawable.baseline_delete_outline_24),
                             contentDescription = stringResource(R.string.recycle_bin),

@@ -10,6 +10,7 @@ import androidx.navigation.navArgument
 import com.alfinaazizah0022.assessement2.screen.DetailScreen
 import com.alfinaazizah0022.assessement2.screen.KEY_ID_BUKU
 import com.alfinaazizah0022.assessement2.screen.MainScreen
+import com.alfinaazizah0022.assessement2.screen.TrashScreen
 
 @Composable
 fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
@@ -31,6 +32,9 @@ fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
         ) { navBackStackEntry ->
             val id = navBackStackEntry.arguments?.getLong(KEY_ID_BUKU)
             DetailScreen(navController, id)
+        }
+        composable( route = Screen.TrashScreen.route) {
+            TrashScreen(navController)
         }
     }
 }

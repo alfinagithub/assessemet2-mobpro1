@@ -10,5 +10,6 @@ data class Buku(
     val judul: String,
     val penulis: String,
     val isbn: String,
-    val kategori: String
+    val kategori: String,
+    val isDeleted: Boolean = false
 )
