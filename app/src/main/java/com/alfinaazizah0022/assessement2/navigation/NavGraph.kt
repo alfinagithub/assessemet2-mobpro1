@@ -7,9 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.alfinaazizah0022.assessement2.MainScreen
 import com.alfinaazizah0022.assessement2.screen.DetailScreen
 import com.alfinaazizah0022.assessement2.screen.KEY_ID_BUKU
+import com.alfinaazizah0022.assessement2.screen.MainScreen
 
 @Composable
 fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
