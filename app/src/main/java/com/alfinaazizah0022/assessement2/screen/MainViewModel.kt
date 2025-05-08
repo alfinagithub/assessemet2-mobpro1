@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
-class MainViewModel(private val dao: BukuDao) : ViewModel() {
+class MainViewModel(val dao: BukuDao) : ViewModel() {
 
     val data: StateFlow<List<Buku>> = dao.getBuku().stateIn(
         scope = viewModelScope,

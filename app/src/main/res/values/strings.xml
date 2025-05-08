@@ -19,4 +19,7 @@
     <string name="list">Tampilan list</string>
     <string name="grid">Tampilan grid</string>
     <string name="recycle_bin">Recycle bin</string>
+    <string name="undo">Undo</string>
+    <string name="no_deleted_books">Tidak ada buku yang dihapus</string>
+    <string name="undo_restore">Pulihkan %1$s</string>
 </resources>
